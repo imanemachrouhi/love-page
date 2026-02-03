@@ -67,6 +67,7 @@ button:hover{
     position:absolute;
     box-shadow:0 6px 15px rgba(255,159,191,.4);
     transition: left 0.3s ease, top 0.3s ease; /* déplacement fluide */
+    z-index:5; /* au-dessus de la box */
 }
 
 /* coeurs */
@@ -105,18 +106,18 @@ const yesBtn = document.getElementById("yes");
 const noBtn  = document.getElementById("no");
 const box    = document.getElementById("questionBox");
 
-// position initiale du bouton No
-noBtn.style.left = "55%";
-noBtn.style.top  = "60%";
+// position initiale du bouton No (visible et au-dessus de la box)
+noBtn.style.left = "70%";
+noBtn.style.top  = "40%";
 
 // bouton No qui glisse
 noBtn.addEventListener("mouseover", () => {
 
-    const maxX = window.innerWidth - noBtn.offsetWidth - 20; // marge pour pas sortir
+    const maxX = window.innerWidth - noBtn.offsetWidth - 20;
     const maxY = window.innerHeight - noBtn.offsetHeight - 20;
 
     // Déplacement par petit saut aléatoire
-    const offsetX = (Math.random() - 0.5) * 300; // -150 à +150px
+    const offsetX = (Math.random() - 0.5) * 300; 
     const offsetY = (Math.random() - 0.5) * 300;
 
     let newX = noBtn.offsetLeft + offsetX;
