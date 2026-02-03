@@ -111,18 +111,25 @@ const box    = document.getElementById("questionBox");
 noBtn.style.left = "70%";
 noBtn.style.top  = "40%";
 
-// bouton No qui glisse
-noBtn.addEventListener("mouseover", () => {
-
+// fonction pour déplacer le bouton No aléatoirement
+function moveNoButton() {
     const maxX = window.innerWidth - noBtn.offsetWidth;
     const maxY = window.innerHeight - noBtn.offsetHeight;
 
-    // déplacement aléatoire avec marge pour éviter de dépasser
     let newX = Math.random() * maxX;
     let newY = Math.random() * maxY;
 
     noBtn.style.left = newX + "px";
     noBtn.style.top  = newY + "px";
+}
+
+// sur PC : souris
+noBtn.addEventListener("mouseover", moveNoButton);
+
+// sur mobile : toucher
+noBtn.addEventListener("touchstart", (e) => {
+    e.preventDefault(); // empêche le clic de sélectionner le bouton
+    moveNoButton();
 });
 
 // fonction pour créer des coeurs rouges
