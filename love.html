@@ -66,8 +66,8 @@ button:hover{
     color:#b4003c;
     position:absolute;
     box-shadow:0 6px 15px rgba(255,159,191,.4);
-    transition: left 0.3s ease, top 0.3s ease; /* déplacement fluide */
-    z-index:5; /* au-dessus de la box */
+    transition: left 0.3s ease, top 0.3s ease;
+    z-index:5;
 }
 
 /* coeurs */
@@ -77,6 +77,7 @@ button:hover{
     font-size:20px;
     animation:floatHeart 5s linear forwards;
     pointer-events:none;
+    color:red; /* couleur rouge */
 }
 
 @keyframes floatHeart{
@@ -106,36 +107,29 @@ const yesBtn = document.getElementById("yes");
 const noBtn  = document.getElementById("no");
 const box    = document.getElementById("questionBox");
 
-// position initiale du bouton No (visible et au-dessus de la box)
+// position initiale du bouton No
 noBtn.style.left = "70%";
 noBtn.style.top  = "40%";
 
 // bouton No qui glisse
 noBtn.addEventListener("mouseover", () => {
 
-    const maxX = window.innerWidth - noBtn.offsetWidth - 20;
-    const maxY = window.innerHeight - noBtn.offsetHeight - 20;
+    const maxX = window.innerWidth - noBtn.offsetWidth;
+    const maxY = window.innerHeight - noBtn.offsetHeight;
 
-    // Déplacement par petit saut aléatoire
-    const offsetX = (Math.random() - 0.5) * 300; 
-    const offsetY = (Math.random() - 0.5) * 300;
-
-    let newX = noBtn.offsetLeft + offsetX;
-    let newY = noBtn.offsetTop + offsetY;
-
-    // limiter le bouton à l'écran
-    newX = Math.max(0, Math.min(maxX, newX));
-    newY = Math.max(0, Math.min(maxY, newY));
+    // déplacement aléatoire avec marge pour éviter de dépasser
+    let newX = Math.random() * maxX;
+    let newY = Math.random() * maxY;
 
     noBtn.style.left = newX + "px";
     noBtn.style.top  = newY + "px";
 });
 
-// fonction pour créer des coeurs
+// fonction pour créer des coeurs rouges
 function createHearts(){
     const heart = document.createElement("div");
     heart.className = "heart";
-    heart.innerText = "💖";
+    heart.innerText = "❤️"; // cœur rouge
 
     heart.style.left = Math.random() * 100 + "vw";
     heart.style.fontSize = (16 + Math.random()*20) + "px";
@@ -161,7 +155,7 @@ yesBtn.addEventListener("click", () => {
 
     noBtn.style.display = "none";
 
-    // pluie de coeurs
+    // pluie de coeurs rouges
     setInterval(createHearts, 200);
 });
 </script>
