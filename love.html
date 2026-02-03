@@ -16,7 +16,6 @@ body{
     overflow:hidden;
 }
 
-/* petite animation de fond */
 body::before{
     content:"";
     position:fixed;
@@ -34,6 +33,7 @@ body::before{
     padding:35px 45px;
     border-radius:20px;
     box-shadow:0 10px 25px rgba(255,77,121,.35);
+    z-index:2;
 }
 
 h2{
@@ -66,6 +66,26 @@ button:hover{
     color:#b4003c;
     position:absolute;
     box-shadow:0 6px 15px rgba(255,159,191,.4);
+}
+
+/* coeurs */
+.heart{
+    position:fixed;
+    bottom:-20px;
+    font-size:20px;
+    animation:floatHeart 5s linear forwards;
+    pointer-events:none;
+}
+
+@keyframes floatHeart{
+    0%{
+        transform:translateY(0) scale(1);
+        opacity:1;
+    }
+    100%{
+        transform:translateY(-110vh) scale(1.8);
+        opacity:0;
+    }
 }
 </style>
 </head>
@@ -101,14 +121,38 @@ noBtn.addEventListener("mouseover", () => {
     noBtn.style.top  = y + "px";
 });
 
+// fonction pour créer des coeurs
+function createHearts(){
+    const heart = document.createElement("div");
+    heart.className = "heart";
+    heart.innerText = "💖";
+
+    heart.style.left = Math.random() * 100 + "vw";
+    heart.style.fontSize = (16 + Math.random()*20) + "px";
+
+    document.body.appendChild(heart);
+
+    setTimeout(() => {
+        heart.remove();
+    }, 5000);
+}
+
 // bouton Yes
 yesBtn.addEventListener("click", () => {
 
     box.innerHTML = `
-        <h2>💗 I love you, My Baby Face 💗</h2>
+        <h2>
+        💗 I love you mooooooore My Baby Face 💗<br><br>
+        I pray to Allah that one day He makes me your halal,
+        and that we are together in love and faith, always.<br><br>
+        kan3ach9aaaaaaaaak 💕
+        </h2>
     `;
 
     noBtn.style.display = "none";
+
+    // pluie de coeurs
+    setInterval(createHearts, 200);
 });
 </script>
 
